@@ -1,3 +1,8 @@
+# TODO
+
+* appraise more versions of ruby & versions of capybara & watir.
+* update description
+
 # SpecialSauce
 Short description and motivation.
 

@@ -85,11 +85,11 @@ class SpecialSauce::DriverTest < ActiveSupport::TestCase
     end
   end
 
-  test "SpecialSauce::Driver.desired_capabilities returns with_caps option when passed" do
+  test "SpecialSauce::Driver.desired_capabilities returns using_caps option when passed" do
     ClimateControl.modify(SELENIUM_BROWSER: 'b', SELENIUM_VERSION: 'v', SELENIUM_PLATFORM: 'p') do
       assert_equal(
         { 'someCap' => 'someVal' },
-        SpecialSauce::Driver.desired_capabilities(with_caps: { 'someCap' => 'someVal' })
+        SpecialSauce::Driver.desired_capabilities(using_caps: { 'someCap' => 'someVal' })
       )
     end
   end
