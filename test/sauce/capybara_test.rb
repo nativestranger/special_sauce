@@ -9,10 +9,6 @@ class SpecialSauce::CapybaraTest < ActiveSupport::TestCase
     @browser = SpecialSauce::Capybara.browser
   end
 
-  def teardown
-    @browser.close
-  end
-
   test "it runs on sauce labs as expected" do
     @browser.visit 'http://localhost:3000'
     assert_equal @browser.text, 'Welcome home!'
