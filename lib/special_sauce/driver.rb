@@ -55,6 +55,11 @@ class SpecialSauce::Driver
       end
     end
 
+    def desired_capabilities(options = {})
+      options[:plus_caps] ||= {}
+      options[:with_caps] || current_browser_caps.merge(options[:plus_caps])
+    end
+
   end
 
 end

@@ -1,6 +1,6 @@
 class SpecialSauce::Capybara < SpecialSauce::Driver
 
-  def self.browser
+  def self.current_session(options = {})
     puts "Sauce Labs auth ENV variables not set." && return unless auth?
 
     ::Capybara.register_driver :special_sauce do |app|
@@ -8,7 +8,7 @@ class SpecialSauce::Capybara < SpecialSauce::Driver
         app,
         browser: :remote,
         url: sauce_endpoint,
-        desired_capabilities: current_browser_caps
+        desired_capabilities: desired_capabilities(options)
       )
     end
 
