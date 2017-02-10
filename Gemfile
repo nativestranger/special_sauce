@@ -15,3 +15,4 @@ gemspec
 
 gem 'capybara', group: [:development, :test]
 gem 'watir', group: [:development, :test]
+gem 'pry', group: [:development, :test]
