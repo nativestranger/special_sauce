@@ -9,14 +9,16 @@ Gem::Specification.new do |s|
   s.version     = SpecialSauce::VERSION
   s.authors     = ["Eric Arnold"]
   s.email       = ["earnold@covermymeds.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of SpecialSauce."
-  s.description = "TODO: Description of SpecialSauce."
+  s.homepage    = "https://github.com/nativestranger/special_sauce"
+  s.summary     = "SpecialSauce helps you run your Capybara or Watir tests with Sauce Labs."
+  s.description = "SpecialSauce helps you run your Capybara or Watir tests with Sauce Labs."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  s.add_dependency "rails", "~> 5.0.1"
+  s.add_dependency "rails", '>= 4.1.0'
 
+  s.add_development_dependency "rails", '>= 4.1.0'
   s.add_development_dependency "sqlite3"
+  s.add_development_dependency "appraisal"
 end

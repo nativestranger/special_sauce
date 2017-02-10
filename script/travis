@@ -1,0 +1,17 @@
+#! /bin/bash
+
+set -e
+
+echo "Running basic tests..."
+rake test
+
+echo "Starting rails server for dummy app..."
+(cd test/dummy; bundle exec rails s -p 3000 -d)
+
+sleep 1
+
+echo "Running Capybara test..."
+rake capybara_test
+
+echo "Running Watir test..."
+rake watir_test

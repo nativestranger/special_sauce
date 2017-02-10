@@ -26,9 +26,22 @@ require 'rake/testtask'
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
   t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
+  t.pattern = 'test/*_test.rb'
   t.verbose = false
 end
 
+Rake::TestTask.new(:watir_test) do |t|
+  t.libs << 'lib'
+  t.libs << 'test'
+  t.pattern = 'test/sauce/watir_test.rb'
+  t.verbose = false
+end
+
+Rake::TestTask.new(:capybara_test) do |t|
+  t.libs << 'lib'
+  t.libs << 'test'
+  t.pattern = 'test/sauce/capybara_test.rb'
+  t.verbose = false
+end
 
 task default: :test

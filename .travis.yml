@@ -1,0 +1,15 @@
+sudo: required
+
+language: ruby
+
+addons:
+  sauce_connect: true
+
+rvm:
+  - 2.2.2
+
+script:
+  - ./script/travis
+
+gemfile:
+  - gemfiles/rails_5.0.1.gemfile
