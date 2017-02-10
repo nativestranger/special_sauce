@@ -9,8 +9,8 @@ rvm:
   - 2.2.2
 
 before_install:
-  - SAUCE_USER_NAME=$SAUCE_USERNAME
-  - SAUCE_API_KEY=$SAUCE_ACCESS_KEY
+  - export SAUCE_USER_NAME=$SAUCE_USERNAME
+  - export SAUCE_API_KEY=$SAUCE_ACCESS_KEY
 
 script:
   - ./script/travis

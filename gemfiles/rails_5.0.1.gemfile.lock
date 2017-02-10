@@ -60,6 +60,7 @@ GEM
       xpath (~> 2.0)
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
+    climate_control (0.1.0)
     coderay (1.1.1)
     concurrent-ruby (1.0.4)
     erubis (2.7.0)
@@ -145,6 +146,7 @@ PLATFORMS
 DEPENDENCIES
   appraisal
   capybara
+  climate_control
   pry
   rails (= 5.0.1)
   special_sauce!

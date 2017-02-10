@@ -6,6 +6,7 @@ ActiveRecord::Migrator.migrations_paths = [File.expand_path("../../test/dummy/db
 require "rails/test_help"
 require "capybara"
 require "watir"
+require 'climate_control'
 
 # Filter out Minitest backtrace while allowing backtrace from other libraries
 # to be shown.
