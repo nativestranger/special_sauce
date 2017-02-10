@@ -12,7 +12,3 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
-
-gem 'capybara'
-gem 'watir'
-gem 'pry', group: [:development, :test]

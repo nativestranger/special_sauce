@@ -11,7 +11,7 @@ do
   rvm $i exec gem install bundler
   rvm $i exec bundle install
   rvm $i exec appraisal install
-  rvm $i exec appraisal rake test
+  rvm $i exec appraisal ./script/travis
   echo "====================================================="
   echo "$i: End Test"
   echo "====================================================="

@@ -2,9 +2,6 @@
 
 set -e
 
-export SAUCE_USER_NAME=$SAUCE_USERNAME
-export SAUCE_API_KEY=$SAUCE_ACCESS_KEY
-
 echo "Running basic tests..."
 rake test
 
