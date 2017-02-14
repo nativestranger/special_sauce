@@ -92,6 +92,8 @@ additional_caps = { 'name' => 'my test name', 'screenResolution' => '1280x1024' 
 @browser = SpecialSauce::Watir.browser(plus_caps: additional_caps)
 ```
 
+## [Tips for running against multiple browsers](docs/MULTIPLEBROWSERS.md)
+
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
