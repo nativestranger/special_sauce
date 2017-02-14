@@ -1,4 +1,8 @@
 # SpecialSauce
+
+[![Build Status](https://travis-ci.org/nativestranger/special_sauce.svg?branch=master)](https://travis-ci.org/nativestranger/special_sauce)
+
+
 special_sauce makes it easy to run existing [capybara](https://github.com/teamcapybara/capybara) or [watir](https://github.com/watir/watir) based tests against [SauceLabs](https://saucelabs.com/) browsers.
 
 ## Installation
