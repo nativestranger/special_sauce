@@ -37,8 +37,12 @@ class SpecialSauce::WatirTest < ActiveSupport::TestCase
   end
 
   SETUP_BROWSER = Proc.new {
+    additional_caps = {
+      'tunnel-identifier' => ENV['TRAVIS_JOB_NUMBER'],
+      'name' => "special-sauce-watir-#{ENV['TRAVIS_JOB_NUMBER']}"
+    }
     browser = SpecialSauce::Watir.browser(
-      plus_caps: { 'tunnel-identifier' => ENV['TRAVIS_JOB_NUMBER'] }
+      plus_caps: additional_caps
     )
     browser.goto 'http://localhost:3000'
     browser

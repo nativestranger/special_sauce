@@ -37,8 +37,12 @@ class SpecialSauce::CapybaraTest < ActiveSupport::TestCase
   end
 
   SETUP_BROWSER = Proc.new {
+    additional_caps = {
+      'tunnel-identifier' => ENV['TRAVIS_JOB_NUMBER'],
+      'name' => "special-sauce-capybara-#{ENV['TRAVIS_JOB_NUMBER']}"
+    }
     browser = SpecialSauce::Capybara.current_session(
-      plus_caps: { 'tunnel-identifier' => ENV['TRAVIS_JOB_NUMBER'] }
+      plus_caps: additional_caps
     )
     browser.visit 'http://localhost:3000'
     browser
