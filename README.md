@@ -8,7 +8,7 @@ special_sauce makes it easy to run existing [capybara](https://github.com/teamca
 ## Installation
 
 ```ruby
-gem 'special_sauce', git: 'https://github.com/nativestranger/special_sauce.git'
+gem 'special_sauce', '0.1.0'
 ```
 
 ## Watir Example
@@ -29,7 +29,9 @@ If the authentication ENV variables are set, `special_sauce` will try to setup a
 
 ## Environment Variables
 
-In order to create remote sessions with Sauce Labs, some environment variables must be set.
+`special_sauce` relies on the following env vars to set up remote sessions with sauce labs.
+
+You can set these explicitly or rely on the [Sauce OnDemand Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Sauce+OnDemand+Plugin) to set them in Jenkins builds.
 
 **Authentication Variables - Required**
 
@@ -38,40 +40,13 @@ In order to create remote sessions with Sauce Labs, some environment variables m
 | SAUCE_USER_NAME        | your saucelabs username                  |
 | SAUCE_API_KEY          | saucelabs api key for your username      |
 
-**Optional**
-
-*The following 3 are set automatically when Jenkin's [Sauce OnDemand Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Sauce+OnDemand+Plugin) is configured to run against **one browser**.*
-
-| Environment Variable   |      Value                               |
-|----------              |:----------------------------------------:|
-| SELENIUM_BROWSER       | browser name                             |
-| SELENIUM_VERSION       | browser version                          |
-| SELENIUM_PLATFORM      | operating system & version               |
-
-OR
-
-*`SAUCE_ONDEMAND_BROWSERS` is set automatically when Jenkin's [Sauce OnDemand Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Sauce+OnDemand+Plugin) is configured to run against **multiple browsers**.*
-
-| Environment Variable    |      Value                                     |
-|----------               |:----------------------------------------------:|
-| SAUCE_ONDEMAND_BROWSERS | JSON serialized array of browser capabilities  |
-| CURRENT_BROWSER_ID | **Set this to choose the browser caps from `SAUCE_ONDEMAND_BROWSERS` that should be used. '0' will be the first in the array, '1' will be the second, etc.** |
-
 ## How Browser Capabilities are set.
 
-When calling `SpecialSauce::Watir.browser` or `SpecialSauce::Capybara.browser` without any arguments, `special_sauce` will use the environment variables above to determine browser capabilities.
+When calling `SpecialSauce::Watir.browser` or `SpecialSauce::Capybara.browser` without any arguments, `special_sauce` will use environment to determine browser capabilities.
 
-* When `SAUCE_ONDEMAND_BROWSERS` is absent, `SELENIUM_BROWSER`, `SELENIUM_VERSION`, and `SELENIUM_PLATFORM` is used.
+You may set these explicitly [or rely on the Sauce OnDemand Plugin](docs/JENKINS_PLUGIN_ENV.md) to set them for you.
 
-* When `SAUCE_ONDEMAND_BROWSERS` is present, the value is parsed into an array and the caps are set based on `CURRENT_BROWSER_ID`.
-
-## Adding Browser Capabilities
-To add additional browser capabilities, use `plus_caps`:
-
-``` ruby
-additional_caps = { 'tunnel-identifier' => ENV['TRAVIS_JOB_NUMBER'] }
-@browser = SpecialSauce::Watir.browser(plus_caps: additional_caps)
-```
+**It is recommended you explicitly declare your browser capabilities with `using_caps`.**
 
 ## Overriding Browser Capabilities
 To override default browser capabilities, use `using_caps`:
@@ -81,6 +56,14 @@ custom_caps = { 'browserName' => 'internet explorer',
                 'version' => '9',
                 'platform' => 'Windows 7' }
 @browser = SpecialSauce::Watir.browser(using_caps: custom_caps)
+```
+
+## Adding Browser Capabilities
+To add additional browser capabilities, use `plus_caps`:
+
+``` ruby
+additional_caps = { 'tunnel-identifier' => ENV['TRAVIS_JOB_NUMBER'] }
+@browser = SpecialSauce::Watir.browser(plus_caps: additional_caps)
 ```
 
 ## Sauce Labs Options
@@ -102,4 +85,4 @@ The gem is available as open source under the terms of the [MIT License](http://
 * appraise more versions of ruby & versions of capybara & watir.
 * allow customization of ENV variables?
 * update description
-* add contributing version
+* add 'contributing' section
