@@ -9,7 +9,12 @@ module SpecialSauce
     end
 
     def self.setup_session(options = {})
-      puts "Sauce Labs auth ENV variables not set." && return unless auth?
+      unless auth?
+        Kernel.warn(
+          'Sauce Labs auth ENV variables not set ... skipping SpecialSauce::Capybara.setup_session'
+        )
+        return
+      end
 
       ::Capybara.register_driver :special_sauce do |app|
         ::Capybara::Selenium::Driver.new(
