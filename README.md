@@ -3,17 +3,17 @@
 [![Build Status](https://travis-ci.org/nativestranger/special_sauce.svg?branch=master)](https://travis-ci.org/nativestranger/special_sauce)
 
 
-special_sauce makes it easy to run existing [capybara](https://github.com/teamcapybara/capybara) or [watir](https://github.com/watir/watir) based tests against [SauceLabs](https://saucelabs.com/) browsers.
+special_sauce makes it easy to run existing [capybara](https://github.com/teamcapybara/capybara) or [watir](https://github.com/watir/watir) based (selenium) tests against [Sauce Labs](https://saucelabs.com/) browsers.
 
 ## Installation
 
 ```ruby
-gem 'special_sauce', '0.1.0'
+gem 'special_sauce', '0.2.0'
 ```
 
 ## Watir Example
 
-If the authentication ENV variables are set, `special_sauce` will try to setup a remote browser, otherwise default to chrome.
+If the authentication ENV variables are set, `special_sauce` will try to set up a remote browser, otherwise default to chrome.
 
 ``` ruby
 @browser = SpecialSauce::Watir.browser || Watir::Browser.new(:chrome)
@@ -21,10 +21,14 @@ If the authentication ENV variables are set, `special_sauce` will try to setup a
 
 ## Capybara Example
 
-If the authentication ENV variables are set, `special_sauce` will try to setup a remote browser, otherwise use your capybara default.
+If the authentication ENV variables are set, `special_sauce` will try to set up a remote browser and set the current drivers, otherwise use Chrome locally.
 
 ``` ruby
-@browser = SpecialSauce::Capybara.browser || Capybara.current_session
+Capybara.register_driver :selenium_chrome do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end
+
+SpecialSauce::Capybara.setup_session || Capybara.current_driver = :selenium_chrome
 ```
 
 ## Environment Variables
@@ -42,7 +46,7 @@ You can set these explicitly or rely on the [Sauce OnDemand Plugin](https://wiki
 
 ## How Browser Capabilities are set.
 
-When calling `SpecialSauce::Watir.browser` or `SpecialSauce::Capybara.browser` without any arguments, `special_sauce` will use environment to determine browser capabilities.
+When calling `SpecialSauce::Watir.browser` or `SpecialSauce::Capybara.setup_session` without any arguments, `special_sauce` will use env vars to determine browser capabilities.
 
 You may set these explicitly [or rely on the Sauce OnDemand Plugin](docs/JENKINS_PLUGIN_ENV.md) to set them for you.
 
@@ -63,7 +67,7 @@ To add additional browser capabilities, use `plus_caps`:
 
 ``` ruby
 additional_caps = { 'tunnel-identifier' => ENV['TRAVIS_JOB_NUMBER'] }
-@browser = SpecialSauce::Watir.browser(plus_caps: additional_caps)
+SpecialSauce::Capybara.setup_session(plus_caps: additional_caps)
 ```
 
 ## Sauce Labs Options
@@ -77,12 +81,13 @@ additional_caps = { 'name' => 'my test name', 'screenResolution' => '1280x1024' 
 
 ## [Tips for running against multiple browsers](docs/MULTIPLEBROWSERS.md)
 
+## [CHANGLELOG](docs/CHANGELOG.md)
+
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
 # TODO
 
-* appraise more versions of ruby & versions of capybara & watir.
-* allow customization of ENV variables?
-* update description
-* add 'contributing' section
+* Appraise more versions of ruby & versions of capybara & watir.
+* Allow customization of ENV variables?
+* Add 'contributing' section.
