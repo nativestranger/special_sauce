@@ -2,7 +2,12 @@ module SpecialSauce
   class Watir < SpecialSauce::Driver
 
     def self.browser(options = {})
-      puts "Sauce Labs auth ENV variables not set." && return unless auth?
+      unless auth?
+        Kernel.warn(
+          'Sauce Labs auth ENV variables not set ... skipping SpecialSauce::Watir.browser'
+        )
+        return
+      end
 
       ::Watir::Browser.new(
         :remote,
