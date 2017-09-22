@@ -4,7 +4,7 @@ module SpecialSauce
     class << self
 
       def auth?
-        authentication != ':'
+        authentication.split(':').reject(&:empty?).count == 2
       end
 
       def authentication
